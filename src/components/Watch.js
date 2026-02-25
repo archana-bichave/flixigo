@@ -12,20 +12,19 @@ import Comment from "./Comment";
 const Watch = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const [videoDetails, setVideoDetails] = useState({});
-  const [snippet, setSnippet] = useState({});
   const [comments, setComments] = useState({});
   const videoId = searchParams.get("v");
   const isSidebarOpen = useSelector((store) => store.app.isMenuOpen);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     dispatch(collapseSidebar(false));
     getVideoDetails();
     getVideoComments();
-  }, []);
+  }, [dispatch]);
 
   const getVideoDetails = async () => {
     const data = await fetch(
-      VIDEO_DETAILS_API_BASE_URL + videoId + "&key=" + GOOGLE_API_KEY
+      VIDEO_DETAILS_API_BASE_URL + videoId + "&key=" + GOOGLE_API_KEY,
     );
     const details = await data.json();
     setVideoDetails(details);
@@ -43,13 +42,15 @@ const Watch = () => {
     <div>
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50"
+          className="fixed inset-0 bg-black/50 sm:hidden"
           onClick={() => dispatch(toggleMenu())}
         />
       )}
-      <div className="p-6 pt-20">
+      <div
+        className={`p-6 pt-20 flex flex-col items-center ${isSidebarOpen ? "sm:ml-56" : ""}`}
+      >
         <iframe
-          className="rounded-lg w-[65rem] h-[28rem]"
+          className="rounded-lg w-full max-w-4xl aspect-video"
           src={"https://www.youtube.com/embed/" + videoId}
           title="YouTube video player"
           frameborder="0"
@@ -61,13 +62,13 @@ const Watch = () => {
         <div className="mt-2">
           {/* <span className="font-medium text-lg">{snippet.channelTitle}</span> */}
         </div>
-        <div className="w-[65rem]">
-          <span className="font-bold text-lg mb-8">
+        <div className="w-full max-w-4xl mt-4">
+          <span className="font-bold text-lg mb-8 block">
             {comments?.items?.length} Comments
           </span>
-          {
-            comments.items?.map((comment) => {return <Comment details={comment}/>})
-          }
+          {comments.items?.map((comment) => {
+            return <Comment details={comment} />;
+          })}
         </div>
       </div>
     </div>

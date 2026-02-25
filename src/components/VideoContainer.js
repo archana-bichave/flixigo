@@ -24,7 +24,7 @@ const VideoContainer = ({ selectedCategory }) => {
 
   const fetchVideosBySearch = useCallback(async (query) => {
     const response = await fetch(
-      `${YOUTUBE_SEARCH_API_BASE_URL}${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`
+      `${YOUTUBE_SEARCH_API_BASE_URL}${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`,
     );
     if (!response.ok) {
       throw new Error("Unable to fetch videos for this filter.");
@@ -39,7 +39,7 @@ const VideoContainer = ({ selectedCategory }) => {
     }
 
     const detailsResponse = await fetch(
-      `${VIDEO_DETAILS_API_BASE_URL}${videoIds.join(",")}&key=${GOOGLE_API_KEY}`
+      `${VIDEO_DETAILS_API_BASE_URL}${videoIds.join(",")}&key=${GOOGLE_API_KEY}`,
     );
     if (!detailsResponse.ok) {
       throw new Error("Unable to fetch video details right now.");
@@ -61,7 +61,7 @@ const VideoContainer = ({ selectedCategory }) => {
         }
 
         const filteredVideos = await fetchVideosBySearch(
-          selectedCategory.query ?? selectedCategory.label
+          selectedCategory.query ?? selectedCategory.label,
         );
         setVideos(filteredVideos);
       } catch (err) {
@@ -98,7 +98,7 @@ const VideoContainer = ({ selectedCategory }) => {
           No videos found for this filter. Try another one!
         </div>
       )}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center gap-4">
         {videos.map((video) => {
           const videoId = getVideoId(video);
           if (!videoId) return null;
