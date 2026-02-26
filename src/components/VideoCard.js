@@ -59,7 +59,7 @@ const VideoCard = ({ video, videoId }) => {
   return (
     <div
       className={`mr-5 mb-6 cursor-pointer rounded-md p-4 hover:shadow-md ${
-        isMenuOpen ? "w-96" : "w-[28rem]"
+        isMenuOpen ? "w-full sm:w-96" : "w-full sm:w-[28rem]"
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

@@ -13,7 +13,7 @@ const SectionPage = () => {
   }
 
   return (
-    <div className={`pt-20 p-6 ${isMenuOpen ? "ml-56" : ""}`}>
+    <div className={`pt-20 p-6 ${isMenuOpen ? "sm:ml-56" : ""}`}>
       <h1 className="mb-3 text-3xl font-bold text-gray-900">{section.label}</h1>
       {section.description && (
         <p className="mb-6 text-gray-600">{section.description}</p>
@@ -27,4 +27,3 @@ const SectionPage = () => {
 };
 
 export default SectionPage;
-

@@ -12,7 +12,7 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <aside className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-56 bg-gray-800 p-4 text-white z-40 overflow-y-auto">
+    <aside className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-3/4 sm:w-56 bg-gray-800 p-4 text-white z-40 overflow-y-auto">
       {sidebarSections.map((section, sectionIndex) => (
         <div key={section.title ?? `section-${sectionIndex}`} className="mb-6">
           {section.title && (

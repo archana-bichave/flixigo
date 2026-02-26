@@ -10,11 +10,11 @@ const MainContainer = () => {
 
   const categories = useMemo(() => homeCategories, []);
   const selectedCategoryConfig = categories.find(
-    (category) => category.id === selectedCategory
+    (category) => category.id === selectedCategory,
   );
 
   return (
-    <div className={`col-span-10 pt-20 p-6 ${isMenuOpen ? "ml-56" : ""}`}>
+    <div className={`col-span-10 pt-20 p-6 ${isMenuOpen ? "sm:ml-56" : ""}`}>
       <ButtonsList
         categories={categories}
         selectedCategory={selectedCategory}
